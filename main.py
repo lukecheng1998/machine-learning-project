@@ -6,6 +6,20 @@ from random import seed;
 from random import randrange;
 from csv import reader;
 
+import pyrebase;
+import sys;
+#import mysql.connector;
+
+firebaseConfig = {
+    "apiKey": "AIzaSyDLc4WYAp6dicyg63gQh63_PRpXt8hkgSg",
+    "authDomain": "cool-keel-299921.firebaseapp.com",
+    "projectId": "cool-keel-299921",
+    "storageBucket": "cool-keel-299921.appspot.com",
+    "messagingSenderId": "505599731918",
+    "appId": "1:505599731918:web:6257e07f82d7c8ee48889f",
+    "measurementId": "G-2WZ6D3L2N9"
+  }
+
 def load_csv(filename):
     dataset = list()
     with open(filename, 'r') as file:
@@ -95,7 +109,16 @@ def perceptron(train, test, l_rate, n_epoch):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     seed(1)
-    filename = 'testing'
-
+    filename = 'sonar.all-data.csv'
+    dataset = load_csv(filename)
+    for i in range(len(dataset[0]) - 1):
+        str_column_to_float(dataset, i)
+    str_column_to_int(dataset, len(dataset[0]) - 1)
+    n_folds = 3
+    l_rate = 0.01
+    n_epoch = 500
+    scores = evaluate_algorithm(dataset, perceptron, n_folds, l_rate, n_epoch)
+    print('Scores: %s' % scores)
+    print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
