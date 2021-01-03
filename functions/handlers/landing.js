@@ -1,7 +1,4 @@
 const { admin, db } = require("../util/admin");
-const firebase = require("firebase");
-const config = require("../util/config");
-firebase.initializeApp(config);
 //Uploading data
 exports.uploadData = (req, res) => {
   const BusBoy = require("busboy");

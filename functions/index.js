@@ -12,7 +12,11 @@ app.use(cors());
 // });
 const {db} = require('./util/admin');
 const { uploadData, memo } = require('./handlers/landing');
+const { signup, login } = require('./handlers/users');
+
 app.post('/memo', memo);
 app.post('/uploadData', uploadData);
+app.post('/signup', signup);
+app.post('/login', login)
 
 exports.api = functions.https.onRequest(app);
