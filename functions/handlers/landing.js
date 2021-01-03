@@ -48,17 +48,23 @@ exports.uploadData = (req, res) => {
   busboy.end(req.rawBody);
 };
 exports.memo = (req, res) => {
-    
-    const dataMemo = {
-      memo: req.body.memo
-    }
-    db.collection('memo').add(dataMemo).then(doc => {
+  const dataMemo = {
+    memo: req.body.memo,
+    createdAt: new Date().toISOString(),
+  };
+  db.collection("memo")
+    .add(dataMemo)
+    .then((doc) => {
       const resMemo = dataMemo;
       resMemo.memoId = doc.id;
-      res.json(resMemo)
+      res.json(resMemo);
     })
-    .catch(err => {
-      res.status(500).json({error: 'something went wrong'});
+    .catch((err) => {
+      res.status(500).json({ error: "something went wrong" });
       console.log(err);
-    })
-}; 
+    });
+};
+//Upload data if you were signed in
+exports.authMemo = (req, res) => {
+
+}

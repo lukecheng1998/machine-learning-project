@@ -40,6 +40,7 @@ exports.signup = (req, res) => {
     .then((idToken) => {
       token = idToken;
       const userCredentials = {
+        userId,
         handle: newUser.handle,
         email: newUser.email,
         createdAt: new Date().toISOString(),

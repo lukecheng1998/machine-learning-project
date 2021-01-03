@@ -1,4 +1,4 @@
-var firebaseConfig = {
+module.exports = {
   apiKey: "AIzaSyDLc4WYAp6dicyg63gQh63_PRpXt8hkgSg",
   authDomain: "cool-keel-299921.firebaseapp.com",
   projectId: "cool-keel-299921",
