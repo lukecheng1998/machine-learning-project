@@ -84,3 +84,18 @@ exports.login = (req, res) => {
         return res.status(403).json({general: 'Wrong credentials, please try again'});
     });
 };
+exports.getAuthenticatedUser = (req, res) => {
+  let userData = {};
+  db.doc(`/users/${req.user.handle}`).get()
+  .then(doc => {
+    if(doc.exists){
+      userData.credentials = doc.data();
+      return db.collection('likes').where('userHandle', '==', req.user.handle).get();
+    }
+  })
+  .then(data => {
+    data.forEach(doc => {
+      //get all of the uploaded data
+    });
+  })
+}

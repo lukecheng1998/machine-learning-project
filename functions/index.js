@@ -11,10 +11,12 @@ app.use(cors());
 //   response.send("Hello from Firebase!");
 // });
 const {db} = require('./util/admin');
-const { uploadData, memo } = require('./handlers/landing');
+const { uploadData, memo, authMemo } = require('./handlers/landing');
 const { signup, login } = require('./handlers/users');
+const FBAuth = require("./util/fbAuth");
 
 app.post('/memo', memo);
+app.post('/memo', FBAuth, authMemo);
 app.post('/uploadData', uploadData);
 app.post('/signup', signup);
 app.post('/login', login)
